@@ -1,0 +1,14 @@
+--- a/flexmark-util/com/vladsch/flexmark/util/html/Attributes.java
++++ b/flexmark-util/com/vladsch/flexmark/util/html/Attributes.java
+@@ -145,7 +145,10 @@
+ 
+     @SuppressWarnings("unchecked")
+     public Set<Map.Entry<BasedSequence, Attribute>> entrySet() {
+-        return myAttributes != null ? myAttributes.entrySet() : Collections.EMPTY_SET;
++        if (myAttributes == null) {
++            return Collections.emptySet();
++        }
++        return (Set<Map.Entry<BasedSequence, Attribute>>) (Set<?>) myAttributes.entrySet();
+     }
+ 
+     public void forEach(BiConsumer<String, Attribute> action) {
